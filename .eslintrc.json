@@ -28,7 +28,7 @@
   "rules": {
     "prettier/prettier": "warn",
     "no-unused-vars": "warn", // Switch to "error" in production
-    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/anchor-is-valid": "error",
     "react/hook-use-state": "error",
     "react/no-children-prop": "error",
     "react/no-danger-with-children": "error",
