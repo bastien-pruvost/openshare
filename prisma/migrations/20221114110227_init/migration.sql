@@ -12,12 +12,13 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Project` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `image` VARCHAR(191) NOT NULL,
+    `websiteLink` VARCHAR(191) NOT NULL,
+    `githubLink` VARCHAR(191) NOT NULL,
+    `userId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
-    `userId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Project_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

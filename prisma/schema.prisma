@@ -19,10 +19,12 @@ model User {
 }
 
 model Project {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  author    User     @relation(references: [id], fields: [userId])
-  userId    Int
+  id          Int      @id @default(autoincrement())
+  image       String
+  websiteLink String
+  githubLink  String
+  userId      Int
+  author      User     @relation(references: [id], fields: [userId])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
