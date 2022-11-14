@@ -22,9 +22,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/ui/*": ["ui/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"],
+      "@/assets/*": ["assets/*"],
       "@/prisma/*": ["prisma/*"]
     },
     "plugins": [
