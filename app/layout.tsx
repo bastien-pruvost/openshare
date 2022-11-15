@@ -1,12 +1,14 @@
-import '@/assets/styles/fonts.scss';
-import '@/assets/styles/variables.scss';
 import '@/assets/styles/globals.scss';
+
+import { ThemeProvider } from '@/lib/contexts/theme-context';
 
 export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' className='dark'>
+    <html lang='en'>
       <head />
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

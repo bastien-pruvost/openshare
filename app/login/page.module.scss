@@ -1,12 +1,11 @@
 .alert {
   border-radius: 16px;
-  background-color: var(--warning-bg);
-  opacity: 0.9;
+  background-color: var(--success-bg);
   margin: 32px;
   padding: 24px;
 
   h1 {
-    color: var(--warning);
+    color: var(--success-text);
     font-size: 1.1rem;
     font-weight: 400;
   }
