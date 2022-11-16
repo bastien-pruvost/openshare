@@ -1,14 +1,8 @@
 'use client';
 
-import { createContext, useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-type ThemeContextValue = {
-  dark: boolean;
-  toggle(): void;
-};
-
-export const ThemeContext = createContext<ThemeContextValue | null>(null);
+import { ThemeContext } from '@/lib/contexts/theme-context';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   function defaultThemeIsDark() {
@@ -24,7 +18,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const [isDarkTheme, setIsDarkTheme] = useState(defaultThemeIsDark());
 
-  const themeContextValue: ThemeContextValue = {
+  const themeContext: ThemeContext = {
     dark: false,
     toggle: () => {
       setIsDarkTheme((isDarkTheme) => {
@@ -43,5 +37,5 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [isDarkTheme]);
 
-  return <ThemeContext.Provider value={themeContextValue}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={themeContext}>{children}</ThemeContext.Provider>;
 }

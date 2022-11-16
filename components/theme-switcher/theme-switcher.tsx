@@ -1,9 +1,10 @@
 'use client';
 
-import { ThemeContext } from '@/lib/contexts/theme-context';
 import { useContext } from 'react';
 
-const ThemeSwitcher = () => {
+import { ThemeContext } from '@/lib/contexts/theme-context';
+
+export const ThemeSwitcher = () => {
   const theme = useContext(ThemeContext);
   function toggleTheme() {
     theme?.toggle();
@@ -11,5 +12,3 @@ const ThemeSwitcher = () => {
 
   return <button onClick={toggleTheme}>Toggle Theme</button>;
 };
-
-export default ThemeSwitcher;

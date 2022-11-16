@@ -1,8 +1,8 @@
+import { ThemeProvider } from '@/components-providers';
+
 import '@/assets/styles/globals.scss';
 
-import { ThemeProvider } from '@/lib/contexts/theme-context';
-
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
       <head />

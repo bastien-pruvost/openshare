@@ -19,10 +19,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/assets/*": ["assets/*"],
-      "@/prisma/*": ["prisma/*"]
+      "@/components": ["./components/index.ts"],
+      "@/components-providers": ["./components-providers/index.ts"],
+      "@/components-ui": ["./components-ui/index.ts"],
+      "@/lib/*": ["./lib/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/prisma/*": ["./prisma/*"]
     },
     "plugins": [
       {
