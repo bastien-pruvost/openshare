@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@/components-providers';
+import { Providers } from 'components-providers';
 
 import '@/assets/styles/globals.scss';
 
@@ -7,7 +7,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <head />
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

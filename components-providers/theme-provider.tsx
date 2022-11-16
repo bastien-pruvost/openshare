@@ -5,7 +5,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { ThemeContext } from '@/lib/contexts/theme-context';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  function defaultThemeIsDark() {
+  function isDefaultThemeDark() {
     if (typeof window !== 'undefined') {
       const isDarkThemeSaved = window?.localStorage?.getItem('dark-theme');
       const isPrefersDark = window?.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -13,10 +13,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         return isDarkThemeSaved === 'true';
       }
       return isPrefersDark;
-    } else return;
+    }
+    return false;
   }
 
-  const [isDarkTheme, setIsDarkTheme] = useState(defaultThemeIsDark());
+  const [isDarkTheme, setIsDarkTheme] = useState(isDefaultThemeDark());
 
   const themeContext: ThemeContext = {
     dark: false,

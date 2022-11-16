@@ -20,7 +20,7 @@
     "baseUrl": ".",
     "paths": {
       "@/components": ["./components/index.ts"],
-      "@/components-providers": ["./components-providers/index.ts"],
+      "@/components-providers": ["components-providers/index.tsx"],
       "@/components-ui": ["./components-ui/index.ts"],
       "@/lib/*": ["./lib/*"],
       "@/assets/*": ["./assets/*"],
