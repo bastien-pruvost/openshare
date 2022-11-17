@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from '@/components';
 import Link from 'next/link';
 
 // import { db } from '@/lib/db';
@@ -24,6 +25,10 @@ export default function RootPage() {
       <button>
         <Link href='/register'>Go to Register</Link>
       </button>
+      <p>
+        <br />
+      </p>
+      <ThemeSwitcher />
     </>
   );
 }

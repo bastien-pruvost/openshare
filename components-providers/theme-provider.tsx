@@ -19,16 +19,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   const [isDarkTheme, setIsDarkTheme] = useState(isDefaultThemeDark());
 
+  function toggleTheme() {
+    setIsDarkTheme((isDarkTheme) => {
+      if (typeof window !== 'undefined') {
+        window?.localStorage?.setItem('dark-theme', (!isDarkTheme).toString());
+      }
+      return !isDarkTheme;
+    });
+  }
+
   const themeContext: ThemeContext = {
     dark: false,
-    toggle: () => {
-      setIsDarkTheme((isDarkTheme) => {
-        if (typeof window !== 'undefined') {
-          window?.localStorage?.setItem('dark-theme', (!isDarkTheme).toString());
-        }
-        return !isDarkTheme;
-      });
-    },
+    toggle: toggleTheme,
   };
 
   useEffect(() => {

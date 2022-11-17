@@ -9,5 +9,5 @@ interface WrapperProps {
 }
 
 export function Wrapper({ children, className, size = 'xl' }: WrapperProps) {
-  return <div className={cn(styles.wrapper, styles[size], className && className)}>{children}</div>;
+  return <div className={cn(styles.wrapper, styles[size], className)}>{children}</div>;
 }

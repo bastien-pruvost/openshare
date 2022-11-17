@@ -27,7 +27,7 @@
   },
   "rules": {
     "prettier/prettier": "warn",
-    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
     "jsx-a11y/anchor-is-valid": "error",
     "react/hook-use-state": "error",
     "react/no-children-prop": "error",
