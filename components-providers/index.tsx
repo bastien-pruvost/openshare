@@ -1,8 +1,10 @@
 import { ThemeProvider } from './theme-provider';
 
-import type { PropsWithChildren } from 'react';
+import type { ReactNode } from 'react';
 
-type ProvidersProps = PropsWithChildren;
+interface ProvidersProps {
+  children: ReactNode;
+}
 
 export function Providers({ children }: ProvidersProps) {
   return (
