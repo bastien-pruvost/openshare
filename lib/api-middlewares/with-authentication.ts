@@ -1,17 +1,23 @@
-import { unstable_getServerSession } from 'next-auth';
-
-import { authOptions } from '@/lib/auth';
+import { getServerSession } from '@/lib/auth';
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 export function withAuthentication(handler: NextApiHandler) {
   return async function (req: NextApiRequest, res: NextApiResponse) {
-    const session = await unstable_getServerSession(req, res, authOptions);
-
-    if (!session) {
-      return res.status(401).end();
+    try {
+      const session = await getServerSession(req, res);
+      if (!session) {
+        return res.status(401).json({
+          message: 'You must be authenticated to perform this request. Please log in and try again',
+        });
+      }
+      return handler(req, res);
+    } catch (error) {
+      return res.status(500).json({
+        message:
+          'Internal Server Error: Please try again later or contact support if the problem persists',
+        error,
+      });
     }
-
-    return handler(req, res);
   };
 }

@@ -1,5 +1,3 @@
-// import 'server-only';
-
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
@@ -7,40 +5,46 @@ import { unstable_getServerSession } from 'next-auth';
 
 import { db } from '@/lib/db';
 
-import type { NextAuthOptions } from 'next-auth';
-import { verifyHash } from './utils/hash';
+import type { Session, NextAuthOptions } from 'next-auth';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: { strategy: 'jwt' },
   secret: process.env.NEXTAUTH_JWT_SECRET,
-  pages: { signIn: '/login' },
+  pages: { signIn: '/signin' },
   providers: [
     CredentialsProvider({
       id: 'credentials',
-      name: 'Email and Password',
+      name: 'Credentials',
       type: 'credentials',
       credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'example@email.com' },
-        password: { label: 'Password', type: 'password', placeholder: '********' },
+        usernameOrEmail: { label: 'Email or Username' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        if (!credentials) {
+        try {
+          if (!credentials) {
+            return null;
+          }
+          const response = await fetch(`${apiUrl}/user/check-credentials`, {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+          }).then((res) => res.json());
+
+          const user = response.user;
+          if (!user) {
+            throw new Error('credentials error !!!');
+            return null;
+          }
+
+          return user;
+        } catch (error) {
+          throw new Error('credentials error !!!');
           return null;
         }
-        const user = await db.user.findFirst({
-          where: {
-            email: credentials.email,
-          },
-        });
-        if (!user || !user.password) {
-          return null;
-        }
-        const isPasswordValid = verifyHash(credentials.password, user.password);
-        if (!isPasswordValid) {
-          return null;
-        }
-        return user;
       },
     }),
     GithubProvider({
@@ -52,11 +56,18 @@ export const authOptions: NextAuthOptions = {
   ],
 };
 
-export async function getServerSession() {
+export async function getServerSession(req?: NextApiRequest, res?: NextApiResponse) {
+  if (req && res) {
+    return await unstable_getServerSession(req, res, authOptions);
+  }
   return await unstable_getServerSession(authOptions);
 }
 
-export async function getServerCurrentUser() {
-  const session = await getServerSession();
+export async function getServerCurrentUser(req?: NextApiRequest, res?: NextApiResponse) {
+  let session: Session | null;
+  if (req && res) {
+    session = await getServerSession(req, res);
+  }
+  session = await getServerSession();
   return session?.user;
 }

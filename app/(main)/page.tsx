@@ -1,14 +1,17 @@
 import { ThemeSwitcher } from '@/components';
+import { getServerSession } from '@/lib/auth';
 import Link from 'next/link';
-
-// import { db } from '@/lib/db';
 
 // import styles from './page.module.scss';
 
-export default function RootPage() {
-  // const newUser = await db.user.create({ data: { email: 'bonjour@test.fr' } });
+export default async function RootPage() {
+  const session = await getServerSession();
 
-  // const users = await db.user.findMany();
+  if (session) {
+    console.log('SESSION : ', session);
+  } else {
+    console.log("THERE ISN'T ANY SESSION !");
+  }
 
   return (
     <>
@@ -17,13 +20,13 @@ export default function RootPage() {
         <br />
       </p>
       <button>
-        <Link href='/login'>Go to Login Page</Link>
+        <Link href='/signin'>Go to Sign In Page</Link>
       </button>
       <p>
         <br />
       </p>
       <button>
-        <Link href='/register'>Go to Register</Link>
+        <Link href='/signup'>Go to Sign Up Page</Link>
       </button>
       <p>
         <br />

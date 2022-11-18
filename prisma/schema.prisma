@@ -11,11 +11,12 @@ generator client {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  username      String?   @unique
   email         String    @unique
   password      String?
-  emailVerified DateTime? @map("email_verified")
+  name          String?
   image         String?
+  emailVerified DateTime? @map("email_verified")
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
 
