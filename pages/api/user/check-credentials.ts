@@ -12,9 +12,9 @@ const supportedMethods = ['POST'];
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!req.method || !supportedMethods?.includes(req.method)) {
-    return res
-      .status(405)
-      .json({ message: `The HTTP method : "${req.method}" is not supported by this route.` });
+    return res.status(405).json({
+      message: `The HTTP method : "${req.method}" is not supported by this route.`,
+    });
   }
 
   if (req.method === 'POST') {
@@ -45,11 +45,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(401).json({ message: 'Invalid username, email or password' });
       }
 
-      return res.status(200).json({ message: 'Successfully signed in', user });
+      return res.status(200).json(user);
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json(error.issues);
       }
+
       return res.status(500).json({
         message:
           'Internal Server Error: Please try again later or contact support if the problem persists',

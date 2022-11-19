@@ -32,17 +32,17 @@ export const authOptions: NextAuthOptions = {
           const response = await fetch(`${apiUrl}/user/check-credentials`, {
             method: 'POST',
             body: JSON.stringify(credentials),
-          }).then((res) => res.json());
+          })
+            .then((res) => res.json())
+            .catch(() => null);
 
           const user = response.user;
           if (!user) {
-            throw new Error('credentials error !!!');
             return null;
           }
 
           return user;
         } catch (error) {
-          throw new Error('credentials error !!!');
           return null;
         }
       },
