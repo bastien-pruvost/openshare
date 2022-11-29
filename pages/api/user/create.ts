@@ -3,11 +3,11 @@ import { Prisma } from '@prisma/client';
 
 import { db } from '@/lib/db';
 import { signUpSchema } from '@/lib/validations/auth';
-import { hash, verifyHash } from '@/lib/utils/hash';
+import { hash } from '@/lib/utils/hash';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// ROUTE "/api/user/create"
+// ROUTE : "/api/user/create"
 
 const supportedMethods = ['POST'];
 

@@ -6,7 +6,7 @@ import { verifyHash } from '@/lib/utils/hash';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// ROUTE "/api/user/check-credentials"
+// ROUTE : "/api/user/check-credentials"
 
 const supportedMethods = ['POST'];
 
