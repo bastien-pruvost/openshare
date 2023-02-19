@@ -1,0 +1,7 @@
+{
+  "commitizen": {
+    "name": "cz_jira",
+    "version": "0.0.1",
+    "tag_format": "$version"
+  }
+}
