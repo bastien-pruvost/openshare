@@ -8,7 +8,7 @@ import { signIn, signOut } from 'next-auth/react';
 
 import { signInSchema, signUpSchema } from '@/lib/validations/auth';
 import { cn } from '@/lib/utils/classnames';
-import { hash } from '@/lib/utils/hash';
+import { hash } from '@/lib/utils/passwords';
 
 import styles from './auth-form.module.scss';
 

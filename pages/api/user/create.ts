@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 
 import { db } from '@/lib/db';
 import { signUpSchema } from '@/lib/validations/auth';
-import { hash } from '@/lib/utils/hash';
+import { hash } from '@/lib/utils/passwords';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 

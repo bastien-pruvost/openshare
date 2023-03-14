@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { db } from '@/lib/db';
 import { signInSchema } from '@/lib/validations/auth';
-import { verifyHash } from '@/lib/utils/hash';
+import { verifyHash } from '@/lib/utils/passwords';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
