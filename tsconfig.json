@@ -1,36 +1,47 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "target": "ES6",
+    "module": "ESNext",
     "moduleResolution": "node",
-    "useDefineForClassFields": true,
-    "noImplicitReturns": true,
-    "resolveJsonModule": true,
-    "noUncheckedIndexedAccess": true,
-    "isolatedModules": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "preserve",
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
     "incremental": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/components": ["./components/index.ts"],
-      "@/components-providers": ["components-providers/index.tsx"],
-      "@/components-ui": ["./components-ui/index.ts"],
-      "@/lib/*": ["./lib/*"],
-      "@/assets/*": ["./assets/*"],
-      "@/prisma/*": ["./prisma/*"]
-    },
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "useDefineForClassFields": true,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/components": ["./src/components/index.ts"],
+      "@/components-providers": ["./src/components-providers/index.tsx"],
+      "@/components-ui": ["./src/components-ui/index.ts"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/prisma/*": ["./prisma/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
