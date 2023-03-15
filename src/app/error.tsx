@@ -12,7 +12,7 @@ const RootError = ({ error, reset }: RootErrorProps) => {
   return (
     <div>
       <h3>Something went wrong...</h3>
-      <button onClick={() => reset()}>Reset error</button>
+      <button onClick={reset}>Reset error</button>
     </div>
   );
 };

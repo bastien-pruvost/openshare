@@ -21,24 +21,33 @@ export const signUpSchema = z
       .min(8, {
         message: 'The password must contain at least 8 characters',
       })
-      .max(64, { message: 'The password must contain less than 64 characters' })
+      .max(128, { message: 'The password must contain less than 128 characters' })
       .refine(
         (password) =>
-          isStrongPassword(password, { minLowercase: 1, minUppercase: 1, minNumbers: 1 }),
-        { message: 'The password must contain lowercase, uppercase and numbers' }
+          isStrongPassword(password, {
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+          }),
+        { message: 'The password must contain 1 lowercase, 1 uppercase, 1 number and 1 symbol' },
       ),
     confirmPassword: z.string().trim(),
     username: z
       .string()
       .trim()
-      .regex(/[A-Za-zÀ-ÖØ-öø-ÿ0-9-_]/g, {
+      .min(2, {
+        message: 'The username must contain at least 2 characters',
+      })
+      .max(64, { message: 'The username must contain less than 64 characters' })
+      .regex(/^[a-zA-Z0-9éèêëàâäïîôöùûüç_-]+$/i, {
         message:
           'The username can only contain letters, letters with accents, dashes and underscores',
       }),
     name: z
       .string()
       .trim()
-      .regex(/[A-Za-zÀ-ÖØ-öø-ÿ0-9\s'-]/g, {
+      .regex(/^([a-zA-ZÀ-ÖØ-öø-ÿ]+[-'\s]?)+[a-zA-ZÀ-ÖØ-öø-ÿ]*$/i, {
         message: 'The name can only contain letters, letters with accents, spaces and dashes',
       })
       .optional(),

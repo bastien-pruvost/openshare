@@ -1,4 +1,4 @@
-import { hash, verifyHash } from './passwords';
+import { hash, verifyHash } from '../passwords';
 import { describe, it, expect, expectTypeOf } from 'vitest';
 
 describe('passwords utils', () => {
