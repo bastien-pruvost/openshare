@@ -1,9 +1,9 @@
-import { getServerSession } from 'src/lib/auth';
+import { getServerSession } from '@/lib/auth';
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-export function withAuthentication(handler: NextApiHandler) {
-  return async function (req: NextApiRequest, res: NextApiResponse) {
+export const withAuthentication = (handler: NextApiHandler) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const session = await getServerSession(req, res);
       if (!session) {
@@ -20,4 +20,4 @@ export function withAuthentication(handler: NextApiHandler) {
       });
     }
   };
-}
+};

@@ -1,13 +1,12 @@
-import type { ReactNode } from 'react';
-import { cn } from 'src/lib/utils/classnames';
+import type { PropsWithChildren, ReactNode } from 'react';
+import { cn } from '@/lib/utils/classnames';
 import styles from './wrapper.module.scss';
 
-interface WrapperProps {
-  children: ReactNode;
-  className?: string;
+type WrapperProps = PropsWithChildren<{
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-}
+  className?: string;
+}>;
 
-export function Wrapper({ children, className, size = 'xl' }: WrapperProps) {
+export const Wrapper = ({ size = 'xl', className, children }: WrapperProps) => {
   return <div className={cn(styles.wrapper, styles[size], className)}>{children}</div>;
-}
+};

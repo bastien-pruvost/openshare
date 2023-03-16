@@ -1,45 +1,36 @@
 import { z } from 'zod';
-import { Prisma } from '@prisma/client';
 
-import { db } from 'src/lib/db';
-import { signUpSchema } from 'src/lib/validations/auth';
-import { hash } from 'src/lib/utils/passwords';
+import { signupSchema } from '@/lib/validation/auth';
+import { db } from '@/lib/db';
+import { hash } from '@/lib/utils/passwords';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// ROUTE : "/api/user/create"
-
-const supportedMethods = ['POST'];
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (!req.method || !supportedMethods?.includes(req.method)) {
-    return res
-      .status(405)
-      .json({ message: `The HTTP method : "${req.method}" is not supported by this route.` });
-  }
-
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
-      const body = signUpSchema.parse(JSON.parse(req.body));
-
+      const body = signupSchema.parse(JSON.parse(req.body));
       const user = await db.user.create({
         data: {
           email: body.email,
-          username: body.username,
-          name: body.name,
           password: hash(body.password),
+          name: body.name,
+          username: body.username,
         },
       });
 
       return res.status(201).json({ message: 'Account successfully created', user });
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof z.ZodError) {
         return res.status(400).json(error);
       }
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        return res.status(400).json(error);
-      }
-      return res.status(500).json(error);
+      return res.status(500).json(error.message);
     }
   }
-}
+
+  return res
+    .status(405)
+    .json({ message: `The HTTP method : "${req.method}" is not supported by this route.` });
+};
+
+export default handler;

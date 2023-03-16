@@ -6,10 +6,10 @@ interface ProvidersProps {
   children: ReactNode;
 }
 
-export function Providers({ children }: ProvidersProps) {
+export const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
       <ThemeProvider>{children}</ThemeProvider>
     </>
   );
-}
+};

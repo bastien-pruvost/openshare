@@ -16,4 +16,4 @@ module.exports = {
   quoteProps: 'as-needed',
   insertPragma: false,
   requirePragma: false,
-}
+};

@@ -11,9 +11,9 @@ generator client {
 
 model User {
   id            String    @id @default(cuid())
-  username      String?   @unique
   email         String    @unique
   password      String?
+  username      String?   @unique
   name          String?
   image         String?
   emailVerified DateTime? @map("email_verified")
@@ -29,6 +29,7 @@ model User {
 
 model Account {
   id                String   @id @default(cuid())
+  userId            String   @map("user_id")
   type              String
   provider          String
   providerAccountId String   @map("provider_account_id")
@@ -41,7 +42,6 @@ model Account {
   session_state     String?
   createdAt         DateTime @default(now()) @map(name: "created_at")
   updatedAt         DateTime @default(now()) @map(name: "updated_at")
-  userId            String   @map("user_id")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -52,8 +52,8 @@ model Account {
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique @map("session_token")
-  expires      DateTime
   userId       String   @map("user_id")
+  expires      DateTime
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

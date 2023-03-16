@@ -1,73 +1,63 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
-import { unstable_getServerSession } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { getServerSession as nextAuthGetServerSession } from 'next-auth';
 
-import { db } from 'src/lib/db';
+import { db } from '@/lib/db';
+import { localAppUrl } from '@/config/site';
 
-import type { Session, NextAuthOptions } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-const apiUrl = process.env['NEXT_PUBLIC_API_URL'] ?? '';
+import type { SigninValues, SignupValues } from 'src/components/auth-forms/signup-form';
+import { signIn } from 'next-auth/react';
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db),
-  session: { strategy: 'jwt' },
-  secret: process.env['NEXTAUTH_JWT_SECRET'] ?? '',
+  adapter: PrismaAdapter(db), // DB Adapter (Prisma)
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+    updateAge: 60 * 60 * 24, // 24 hours
+  },
+  secret: process.env.NEXTAUTH_SECRET ?? '',
   pages: { signIn: '/signin' },
   providers: [
+    // Github Provider to connect user with Github account
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID ?? '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? '',
+      allowDangerousEmailAccountLinking: true,
+    }),
+    // Credentials Provider to connect user with email
     CredentialsProvider({
-      id: 'credentials',
-      name: 'Credentials',
-      type: 'credentials',
       credentials: {
-        usernameOrEmail: { label: 'Email or Username' },
+        email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
-        try {
-          if (!credentials) {
-            return null;
-          }
-          const response = await fetch(`${apiUrl}/user/check-credentials`, {
-            method: 'POST',
-            body: JSON.stringify(credentials),
-          })
-            .then((res) => res.json())
-            .catch(() => null);
+      // Check credentials during a signin request
+      async authorize(credentials) {
+        const credentialsResponse = await fetch(`${localAppUrl}/api/user/check-credentials`, {
+          method: 'POST',
+          body: JSON.stringify(credentials),
+        });
 
-          const user = response.user;
-          if (!user) {
-            return null;
-          }
+        const data = await credentialsResponse.json();
 
-          return user;
-        } catch (error) {
-          return null;
+        if (!credentialsResponse.ok) {
+          throw new Error(data.message);
+        }
+
+        // If no error and we have user data, return it
+        if (credentialsResponse.ok && data.user) {
+          return data.user;
         }
       },
-    }),
-    GithubProvider({
-      id: 'github',
-      name: 'Github',
-      clientId: process.env.GITHUB_CLIENT_ID || '',
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
     }),
   ],
 };
 
-export async function getServerSession(req?: NextApiRequest, res?: NextApiResponse) {
+export const getServerSession = async (req?: NextApiRequest, res?: NextApiResponse) => {
   if (req && res) {
-    return await unstable_getServerSession(req, res, authOptions);
+    return await nextAuthGetServerSession(req, res, authOptions);
   }
-  return await unstable_getServerSession(authOptions);
-}
-
-export async function getServerCurrentUser(req?: NextApiRequest, res?: NextApiResponse) {
-  let session: Session | null;
-  if (req && res) {
-    session = await getServerSession(req, res);
-  }
-  session = await getServerSession();
-  return session?.user;
-}
+  return await nextAuthGetServerSession(authOptions);
+};

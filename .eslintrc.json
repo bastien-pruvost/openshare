@@ -1,10 +1,4 @@
 {
-  // "env": {
-  //   "browser": true,
-  //   "node": true,
-  //   "commonjs": true,
-  //   "es2021": true
-  // },
   "plugins": ["react", "react-hooks", "jsx-a11y", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
@@ -13,7 +7,6 @@
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "next/core-web-vitals",
-    "next/babel",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],

@@ -2,10 +2,10 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 
-import { ThemeContext } from 'src/lib/contexts/theme-context';
+import { ThemeContext } from '@/lib/contexts/theme-context';
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  function isDefaultThemeDark() {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const isDefaultThemeDark = () => {
     if (typeof window !== 'undefined') {
       const isDarkThemeSaved = window?.localStorage?.getItem('dark-theme');
       const isPrefersDark = window?.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -15,18 +15,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       return isPrefersDark;
     }
     return false;
-  }
+  };
 
   const [isDarkTheme, setIsDarkTheme] = useState(isDefaultThemeDark());
 
-  function toggleTheme() {
+  const toggleTheme = () => {
     setIsDarkTheme((isDarkTheme) => {
       if (typeof window !== 'undefined') {
         window?.localStorage?.setItem('dark-theme', (!isDarkTheme).toString());
       }
       return !isDarkTheme;
     });
-  }
+  };
 
   const themeContext: ThemeContext = {
     dark: false,
@@ -41,4 +41,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [isDarkTheme]);
 
   return <ThemeContext.Provider value={themeContext}>{children}</ThemeContext.Provider>;
-}
+};

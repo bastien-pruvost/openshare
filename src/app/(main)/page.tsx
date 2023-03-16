@@ -1,16 +1,18 @@
-import { ThemeSwitcher } from 'src/components';
-import { getServerSession } from 'src/lib/auth';
+import { ThemeSwitcher } from '@/components';
+import { getServerSession } from '@/lib/auth';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { SignoutButton } from 'src/components/signout-button/signout-button';
 
 // import styles from './page.module.scss';
 
-export default async function RootPage() {
+const RootPage = async () => {
   const session = await getServerSession();
 
   if (session) {
     console.log('SESSION : ', session);
   } else {
-    console.log("THERE ISN'T ANY SESSION !");
+    console.log('NO SESSION !');
   }
 
   return (
@@ -31,7 +33,13 @@ export default async function RootPage() {
       <p>
         <br />
       </p>
+      <SignoutButton />
+      <p>
+        <br />
+      </p>
       <ThemeSwitcher />
     </>
   );
-}
+};
+
+export default RootPage;

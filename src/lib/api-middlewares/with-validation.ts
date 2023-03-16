@@ -3,8 +3,8 @@ import * as z from 'zod';
 import type { ZodSchema } from 'zod';
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-export function withValidation<T extends ZodSchema>(schema: T, handler: NextApiHandler) {
-  return async function (req: NextApiRequest, res: NextApiResponse) {
+export const withValidation = <T extends ZodSchema>(schema: T, handler: NextApiHandler) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const body = req.body ? JSON.parse(req.body) : {};
 
@@ -19,4 +19,4 @@ export function withValidation<T extends ZodSchema>(schema: T, handler: NextApiH
       return res.status(422).end();
     }
   };
-}
+};

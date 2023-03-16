@@ -1,15 +1,17 @@
 import Link from 'next/link';
 
-import { AuthForm } from 'src/components';
+import { SigninForm } from '@/components';
 
-export default function SignInPage() {
+const SigninPage = () => {
   return (
     <>
       <button>
         <Link href='/'>Back to home</Link>
       </button>
       <h1>Sign In to OpenShare</h1>
-      <AuthForm method='signin' />
+      <SigninForm />
     </>
   );
-}
+};
+
+export default SigninPage;

@@ -1,3 +1,5 @@
-import { db } from 'src/lib/db';
+import { db } from '@/lib/db';
 
-// export default function handler () {}
+// const handler = () => {}
+
+// export default handler
