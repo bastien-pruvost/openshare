@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { db } from '@/lib/db';
 import { signinSchema } from '@/lib/validation/auth';
 import { verifyHash } from '@/lib/utils/passwords';
+import { formatErrorMessage } from '@/lib/utils/error-messages';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -13,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const user = await db.user.findFirst({
         where: {
-          OR: [{ email: body.email }],
+          email: body.email,
         },
         select: {
           id: true,
@@ -31,34 +32,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       if (!user.password) {
-        if (!user.accounts || user.accounts.length === 0) {
-          throw new Error();
-        }
-
-        let associatedWith = '';
-        let connectWith = '';
-        user.accounts.forEach((account, index) => {
-          if (user.accounts.length === 1) {
-            associatedWith = account.provider;
-            connectWith = account.provider;
-          } else if (index === user.accounts.length - 1) {
-            associatedWith += ` and ${account.provider}`;
-            connectWith += ` or ${account.provider}`;
-          } else if (index === 0) {
-            associatedWith += `${account.provider}`;
-            connectWith += `${account.provider}`;
-          } else {
-            associatedWith += `, ${account.provider}`;
-            connectWith += `, ${account.provider}`;
-          }
-        });
+        const errorMessage = formatErrorMessage.accountAlreadyAssociatedWithProviders(
+          user.accounts,
+        );
         return res.status(400).json({
-          message: `Your account is associated with ${associatedWith}, please connect with ${connectWith}.`,
+          message: errorMessage,
         });
       }
 
       const isPasswordValid = verifyHash(body.password, user.password);
-
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }

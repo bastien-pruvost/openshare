@@ -16,7 +16,6 @@
     "resolveJsonModule": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "useDefineForClassFields": true,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
@@ -26,7 +25,6 @@
     "noImplicitReturns": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    // "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "plugins": [
       {

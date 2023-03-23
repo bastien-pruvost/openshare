@@ -17,7 +17,7 @@ const rubik = Rubik({
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   return (
-    <html lang={siteConfig.lang} className={cn(rubik.className)}>
+    <html lang={siteConfig.lang} className={rubik.className}>
       <head />
       <body>
         <Providers>{children}</Providers>

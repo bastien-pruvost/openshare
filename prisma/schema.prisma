@@ -22,7 +22,7 @@ model User {
 
   accounts Account[]
   sessions Session[]
-  Project  Project[]
+  projects Project[]
 
   @@map(name: "users")
 }

@@ -10,14 +10,19 @@ https://www.openshare.dev
  -->
 
 
-<a href="">
-  <img src="./public/og.png" alt="Logo" width="128" >
-</a>
 
+  <a href="">
+    <img src="./public/og.png" alt="Logo" width="64" >
+  </a>
+  
+  
+  # Openshare
+  
+  Openshare is a website for sharing open source projects with the community.
 
-# Openshare
+[See the design on Figma](https://www.figma.com/file/jqUwAbp0csHAGv4osqQYDK/Untitled?node-id=0%3A1&t=hRngUpaV1auTm2nJ-1)
 
-Openshare is a website for sharing open source projects with the community.
+Database and routing schemas are located in `./ressources`, you can open these schemas with excalidraw.
 
 <!-- [www.openshare.dev](https://www.openshare.dev) -->
 
@@ -32,14 +37,17 @@ Much longer description of the project -->
 
 ## Features
 
-- Light / Dark Themes
 - Credentials and Github authentication
 
 
 ## Roadmap
 
-- [ ] Model the structure of the database
-- [ ] Model the structure of routing
+
+- [x] ~Add authentication with next-auth~
+- [ ] Finish the structure schema of the database
+- [ ] Finish the structure schema of the routing
+- [ ] Finish the model on Figma
+- [ ] Add light & dark modes using next-themes
 - [ ] Signup and Signin pages
 - [ ] Home page (with all projects)
 - [ ] Project page
@@ -99,10 +107,10 @@ Much longer description of the project -->
   cd openshare
 ```
 
-3. Copy `.env.example` to `.env.local` and update environment variables
+3. Copy `.env.example` to `.env` and update environment variables
 
 ```bash
-  cp .env.example .env.local
+  cp .env.example .env
 ```
 
 4. Install dependencies:
