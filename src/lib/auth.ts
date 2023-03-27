@@ -8,8 +8,6 @@ import { localAppUrl } from '@/config/site';
 
 import type { NextAuthOptions } from 'next-auth';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { SigninValues, SignupValues } from 'src/components/auth-forms/signup-form';
-import { signIn } from 'next-auth/react';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db), // DB Adapter (Prisma)
