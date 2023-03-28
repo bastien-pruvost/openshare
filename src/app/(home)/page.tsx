@@ -1,8 +1,7 @@
-import { ThemeSwitcher } from '@/components';
-import { getServerSession } from '@/lib/auth';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { SignoutButton } from 'src/components/signout-button/signout-button';
+import { getServerSession } from '@/lib/auth';
+import { ThemeButton } from '@/components';
+import { SignoutButton } from '@/components';
 
 // import styles from './page.module.scss';
 
@@ -37,7 +36,7 @@ const RootPage = async () => {
       <p>
         <br />
       </p>
-      <ThemeSwitcher />
+      <ThemeButton />
     </>
   );
 };

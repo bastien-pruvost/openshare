@@ -1,4 +1,5 @@
-import { ThemeProvider } from './theme-provider';
+'use client';
+import { ThemeProvider } from 'next-themes';
 
 import type { ReactNode } from 'react';
 
@@ -9,7 +10,7 @@ interface ProvidersProps {
 export const Providers = ({ children }: ProvidersProps) => {
   return (
     <>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider attribute='class'>{children}</ThemeProvider>
     </>
   );
 };

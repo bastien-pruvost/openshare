@@ -22,7 +22,7 @@ a {
 // -------------- Colors ----------------
 // --------------------------------------
 
-body {
+html {
   --white: #ffffff;
   --black: #06090e;
 
@@ -83,11 +83,11 @@ body {
 }
 
 // -- Light Theme --
-body.light {
+html.light {
   color-scheme: light;
 
   --background-color: var(--white);
-  --text-color: var(--gray-800);
+  --text-color: var(--grey-800);
 
   --primary: var(--primary-700);
   --primary-hover: var(--primary-800);
@@ -112,10 +112,10 @@ body.light {
 }
 
 // -- Dark Theme --
-body.dark {
+html.dark {
   color-scheme: dark;
 
-  --background-color: var(--gray-800);
+  --background-color: var(--grey-800);
   --text-color: var(--white);
 
   --primary: var(--primary-500);
@@ -151,3 +151,7 @@ body.dark {
 // --------------------------------------
 // --------------- Other ----------------
 // --------------------------------------
+
+body {
+  background-color: var(--background-color);
+}
