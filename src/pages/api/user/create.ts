@@ -15,16 +15,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           email: body.email,
           password: hash(body.password),
           name: body.name,
-          username: body.username,
-        },
+          username: body.username
+        }
       });
 
       return res.status(201).json({ message: 'Account successfully created', user });
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof z.ZodError) {
         return res.status(400).json(error);
       }
-      return res.status(500).json(error.message);
+      if (error instanceof Error) {
+        return res.status(500).json(error.message);
+      }
     }
   }
 

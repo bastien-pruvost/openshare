@@ -6,7 +6,8 @@ describe('formatErrorMessage', () => {
   describe('formatAccountAlreadyAssociatedWithProvidersErrorMessage', () => {
     it('should throw an error if no accounts are provided', () => {
       expect(() => {
-        formatErrorMessage.accountAlreadyAssociatedWithProviders(undefined!);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        formatErrorMessage.accountAlreadyAssociatedWithProviders(null!);
       }).toThrow();
       expect(() => {
         formatErrorMessage.accountAlreadyAssociatedWithProviders([]);
@@ -17,7 +18,7 @@ describe('formatErrorMessage', () => {
       const accounts = [{ provider: 'Github' }] as Account[];
       const errorMessage = formatErrorMessage.accountAlreadyAssociatedWithProviders(accounts);
       expect(errorMessage).toEqual(
-        'Your account is associated with Github, please connect with Github.',
+        'Your account is associated with Github, please connect with Github.'
       );
     });
 
@@ -25,7 +26,7 @@ describe('formatErrorMessage', () => {
       const accounts = [{ provider: 'Github' }, { provider: 'Gitlab' }] as Account[];
       const errorMessage = formatErrorMessage.accountAlreadyAssociatedWithProviders(accounts);
       expect(errorMessage).toEqual(
-        'Your account is associated with Github and Gitlab, please connect with Github or Gitlab.',
+        'Your account is associated with Github and Gitlab, please connect with Github or Gitlab.'
       );
     });
 
@@ -33,11 +34,11 @@ describe('formatErrorMessage', () => {
       const accounts = [
         { provider: 'Github' },
         { provider: 'Gitlab' },
-        { provider: 'Google' },
+        { provider: 'Google' }
       ] as Account[];
       const errorMessage = formatErrorMessage.accountAlreadyAssociatedWithProviders(accounts);
       expect(errorMessage).toEqual(
-        'Your account is associated with Github, Gitlab and Google, please connect with Github, Gitlab or Google.',
+        'Your account is associated with Github, Gitlab and Google, please connect with Github, Gitlab or Google.'
       );
     });
   });

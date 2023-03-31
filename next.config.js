@@ -8,13 +8,13 @@ const nextConfig = {
   poweredByHeader: false,
   swcMinify: true,
   experimental: {
-    appDir: true,
+    appDir: true
     // optimizeCss: true,
     // typedRoutes: true,
   },
   images: {
-    domains: ['avatars.githubusercontent.com'],
-  },
+    domains: ['avatars.githubusercontent.com']
+  }
 };
 
 module.exports = nextConfig;

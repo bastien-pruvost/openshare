@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const user = await db.user.findFirst({
         where: {
-          email: body.email,
+          email: body.email
         },
         select: {
           id: true,
@@ -23,8 +23,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           name: true,
           username: true,
           image: true,
-          accounts: true,
-        },
+          accounts: true
+        }
       });
 
       if (!user) {
@@ -33,10 +33,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (!user.password) {
         const errorMessage = formatErrorMessage.accountAlreadyAssociatedWithProviders(
-          user.accounts,
+          user.accounts
         );
         return res.status(400).json({
-          message: errorMessage,
+          message: errorMessage
         });
       }
 
@@ -54,13 +54,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({
         message:
           'Internal Server Error: Please try again later or contact support if the problem persists',
-        error,
+        error
       });
     }
   }
 
   return res.status(405).json({
-    message: `The HTTP method : "${req.method}" is not supported by this route.`,
+    message: `The HTTP method : "${req.method}" is not supported by this route.`
   });
 };
 

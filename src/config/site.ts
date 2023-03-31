@@ -8,13 +8,13 @@ export const siteConfig = {
   title: 'Openshare | Share your open-source web projects with the community',
   description:
     'With Openshare, you can share all your open-source web apps with the community, in order to get feedback and contributions',
-  creator: 'Bastien Pruvost',
+  creator: 'Bastien Pruvost'
 };
 
 export const metadataConfig = {
   title: {
     default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    template: `%s | ${siteConfig.title}`
   },
   description: siteConfig.description,
   creator: siteConfig.creator,
@@ -30,9 +30,9 @@ export const metadataConfig = {
         url: `${appUrl}/og.jpeg`,
         width: 1200,
         height: 600,
-        alt: siteConfig.title,
-      },
-    ],
+        alt: siteConfig.title
+      }
+    ]
   },
   robots: {
     index: true,
@@ -41,7 +41,7 @@ export const metadataConfig = {
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
-    },
-  },
+      noimageindex: false
+    }
+  }
 };

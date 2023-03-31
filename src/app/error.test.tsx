@@ -18,8 +18,8 @@ describe('RootError component', () => {
 
   it('should display error message', () => {
     render(<RootError error={error} reset={reset} />);
-    const text = screen.getByRole('heading', { level: 3, name: /Something went wrong/ });
-    expect(text).toBeTruthy();
+    const textElement = screen.getByRole('heading', { level: 3, name: /Something went wrong/ });
+    expect(textElement).toBeInTheDocument();
   });
 
   it('should call reset function when reset button is clicked', async () => {

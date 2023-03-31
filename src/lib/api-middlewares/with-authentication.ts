@@ -8,7 +8,7 @@ export const withAuthentication = (handler: NextApiHandler) => {
       const session = await getServerSession(req, res);
       if (!session) {
         return res.status(401).json({
-          message: 'You must be authenticated to perform this request. Please log in and try again',
+          message: 'You must be authenticated to perform this request. Please log in and try again'
         });
       }
       return handler(req, res);
@@ -16,7 +16,7 @@ export const withAuthentication = (handler: NextApiHandler) => {
       return res.status(500).json({
         message:
           'Internal Server Error: Please try again later or contact support if the problem persists',
-        error,
+        error
       });
     }
   };

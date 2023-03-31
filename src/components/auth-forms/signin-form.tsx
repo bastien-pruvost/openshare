@@ -26,14 +26,14 @@ export const SigninForm = ({ className }: SigninFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SigninValues>({ resolver: zodResolver(signinSchema) });
 
   const handleSignin = async (data: SigninValues) => {
     const response = await signIn('credentials', {
       ...data,
       redirect: false,
-      callbackUrl: searchParams?.get('from') || '/',
+      callbackUrl: searchParams?.get('from') || '/'
     });
 
     if (!response?.ok && response?.error) {
@@ -48,7 +48,7 @@ export const SigninForm = ({ className }: SigninFormProps) => {
   const handleGithubSignin = async () => {
     const response = await signIn('github', {
       redirect: false,
-      callbackUrl: searchParams?.get('from') || '/',
+      callbackUrl: searchParams?.get('from') || '/'
     });
 
     if (!response?.ok && response?.error) {

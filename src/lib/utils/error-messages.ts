@@ -25,5 +25,5 @@ export const formatErrorMessage = {
       }
     });
     return `Your account is associated with ${stringAssociatedWith}, please connect with ${stringConnectWith}.`;
-  },
+  }
 };

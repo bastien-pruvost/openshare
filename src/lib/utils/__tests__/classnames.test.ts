@@ -34,9 +34,9 @@ describe('cn', () => {
     const className4 = 'my-class-4';
     const returnedClassName = cn(
       1 === 1 && className1,
-      2 === 2 ? className2 : '',
+      className2 ? className2 : '',
       null && className3,
-      false ? className4 : null,
+      className4 ? className4 : null
     );
     const expectedClassName = `${className1} ${className2}`;
 

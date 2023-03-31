@@ -24,7 +24,7 @@ describe('Sign Up schema', () => {
       password: 'Password-Test-123456',
       confirmPassword: 'Password-Test-123456',
       name: 'John-Doe José',
-      username: 'john_doe-75-28',
+      username: 'john_doe-75-28'
     };
 
     expect(() => signupSchema.parse(validInput)).not.toThrowError();
@@ -37,36 +37,36 @@ describe('Sign Up schema', () => {
         password: 'Password-Test-123456',
         confirmPassword: 'Password-Test-123456',
         name: 'John Test',
-        username: 'john_doe-75-28',
+        username: 'john_doe-75-28'
       },
       {
         email: 'email@test.com',
         password: 'InvalidPasswordTest123456',
         confirmPassword: 'InvalidPasswordTest123456',
         name: 'John Test',
-        username: 'john_doe-75-28',
+        username: 'john_doe-75-28'
       },
       {
         email: 'email@test.com',
         password: 'Password-Test-123456',
         confirmPassword: 'password mismatch',
         name: 'John Test',
-        username: 'john_doe-75-28',
+        username: 'john_doe-75-28'
       },
       {
         email: 'email@test.com',
         password: 'Password-Test-123456',
         confirmPassword: 'Password-Test-123456',
         name: 'John Test $%:/!-_',
-        username: 'john_doe-75-28',
+        username: 'john_doe-75-28'
       },
       {
         email: 'email@test.com',
         password: 'Password-Test-123456',
         confirmPassword: 'Password-Test-123456',
         name: 'John Test',
-        username: 'username with space',
-      },
+        username: 'username with space'
+      }
     ];
 
     invalidInputs.forEach((input) => {

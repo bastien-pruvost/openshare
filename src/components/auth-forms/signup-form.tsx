@@ -26,13 +26,13 @@ export const SignupForm = ({ className }: SignupFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SignupValues>({ resolver: zodResolver(signupSchema) });
 
   const handleSignup = async (data: SignupValues) => {
     const response = await fetch(`/api/user/create`, {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
 
     const resBody = await response.json();
@@ -46,7 +46,7 @@ export const SignupForm = ({ className }: SignupFormProps) => {
   const handleGithubSignin = async () => {
     const response = await signIn('github', {
       redirect: false,
-      callbackUrl: searchParams?.get('from') || '/',
+      callbackUrl: searchParams?.get('from') || '/'
     });
 
     if (!response?.ok && response?.error) {
